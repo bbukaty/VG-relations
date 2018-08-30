@@ -1,2 +1,2 @@
-# VG_relations
+# VG-relations
 Visual Genome Relationship Visualization
