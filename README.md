@@ -32,13 +32,9 @@ Example:
 I found this data format interesting as it potentially suggests a method for commonsense inference on visual data using priors from this dataset. For example, 'what kinds of objects usually contain food? → bowls, plates, table'.
 
 # Installation
-Clone or download the repository, then download the relation data from the Visual Genome Dataset [here](https://visualgenome.org/static/data/dataset/relationships.json.zip).  
-In the main project directory, make a directory called `data` and extract `relationships.json` there.
-
-Next, run `python scripts/count_relations.py`. This creates a `data/subjects` directory populated with a json file for every object in Visual Genome.  
-This prevents us from needing to load a really large file into our explorer every time we want to use it.
-
-You should now be able to open `explorer.html` in your web browser of choice (I used Chrome).
+Clone or download the repository.  
+From the main directory run `scripts/setup.sh`. This downloads the data and runs a python script to process it. It's simple enough that Python 2 and 3 should both work.  
+Open `explorer.html` in your web browser of choice (I used Chrome).
 
 # Navigation
 Type an item into the search bar and hit submit to see relations in which the item was the subject.  

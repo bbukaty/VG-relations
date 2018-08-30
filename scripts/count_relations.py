@@ -28,13 +28,13 @@ def get_triplet(relationship):
     return subj_name.lower(), relationship['predicate'].lower(), obj_name.lower()
 
 def main(args):
-    print "Loading data..."
+    print("Loading data...")
     try:
         with open(args.input) as f:
             data = json.load(f)
-        print "Done"
+        print("Done")
     except:
-        print "Error loading data. Exiting."
+        print("Error loading data. Exiting.")
         exit()
     
     subjects = {}
