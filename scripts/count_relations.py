@@ -1,14 +1,10 @@
 """
-Parses through all the relationships in Visual Genome and counts instances relative to a given subject.
-Output format:
+Parses through all the subject-relation-object relationships in Visual Genome and counts relations and objects relative to a given subject. Outputs a json file for 
+
+Output format example (person.json):
 {
-    "person": {
-        "wears": { "backpack": 12, "hat": 10 },
-        "eats": { "corn": 9 }
-    },
-    "plate": {
-        "on": { "table": 5, "placemat": 3 }
-    }
+    "wears": { "backpack": 12, "hat": 10 },
+    "eats": { "corn": 9 }
 }
 """
 
@@ -16,7 +12,10 @@ import json
 import os
 import argparse
 
-
+'''
+Deal with some idiosyncrasies in Visual Genome, lowercase everything.
+Returns subject, relation, object strings.
+'''
 def get_triplet(relationship):
     try:
         subj_name = relationship['subject']['names'][0]
@@ -39,8 +38,6 @@ def main(args):
         exit()
     
     subjects = {}
-    objects = {}
-    
     for image in data:
         for relationship in image['relationships']:
             subj_name, rel_name, obj_name = get_triplet(relationship)
@@ -50,16 +47,10 @@ def main(args):
             rel[obj_name] = rel.get(obj_name, 0) + 1
             subj[rel_name] = rel
             subjects[subj_name] = subj
-            
-            obj = objects.get(obj_name, {})
-            rel = obj.get(rel_name, {})
-            rel[subj_name] = rel.get(subj_name, 0) + 1
-            obj[rel_name] = rel
-            objects[obj_name] = obj
     
-    
+    # Output data
     with open('{}/subjects_all.json'.format(args.output_dir), 'w') as f:
-        json.dump({ "subjects": subjects }, f)
+        json.dump(subjects, f)
     
     subjects_dir = '{}/subjects/'.format(args.output_dir)
     if not os.path.exists(subjects_dir):
@@ -70,9 +61,7 @@ def main(args):
             with open('{}/{}.json'.format(subjects_dir, subj_name), 'w') as f:
                 json.dump(subject, f)
         # subject name is something wonky so we can't name a file after it /shrug
-        except IOError:
-            pass
-        except UnicodeEncodeError:
+        except (IOError, UnicodeEncodeError) as e:
             pass
         
         
@@ -83,8 +72,6 @@ if __name__ == '__main__':
                         help="JSON file containing VG relationship annotations")
     parser.add_argument('--output-dir', type=str, default='data',
                         help="Where to store the tallied output")
-    parser.add_argument('--prune', type=int, default=0,
-                        help="Minimum number of occurrences needed to save the node")
 
     args = parser.parse_args()
     main(args)

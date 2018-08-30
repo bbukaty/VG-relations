@@ -61,6 +61,8 @@
             return total;
         }
         
+        /* Given a subject name and an optional relation name, generates data for a
+        Sankey visualization and displays it in the page. */
         function createSankey(subjName, relName=null) {
             d3.json("data/subjects/" + subjName + ".json", function(error, json) {
                 if (error != null) {
@@ -143,6 +145,7 @@
             return { nodes: nodes, links: links }
         }
         
+        /* Draws the diagram and initializes click handlers and tooltips. */
         function displaySankey(sankeyData) {
             d3.select("svg").remove(); // clear existing chart
             var chart = d3.select("#chart").append("svg").chart("Sankey.Path");
@@ -166,12 +169,12 @@
                 })
                 .draw(sankeyData);
             // add tooltips to links
-            d3.select("svg").selectAll(".link").append("title")
-                .text(function(link) {
-                    return link.source.name + " → " + link.target.name + "\n" + link.value + " occurrences"
-                });
+            d3.select("svg").selectAll(".link").append("title").text(function(link) {
+                return link.source.name + " → " + link.target.name + "\n" + link.value + " occurrences"
+            });
         }
         
+        // example chart on load
         createSankey('kiwi');
         
     </script>
