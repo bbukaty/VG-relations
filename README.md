@@ -1,10 +1,10 @@
 # VG-relations
-Visual Genome Relationship Visualization
+Visual Genome Relationship Visualization  
 Hosted at (Visual Genome Link)
 
 This is a tool for visualizing the frequency of object relationships in the Visual Genome dataset.
 
-![Visualization Example](example.png)
+![Visualization Example](kiwi.gif)
 
 It was built with [this d3 Sankey diagram library.](https://github.com/q-m/d3.chart.sankey)
 
