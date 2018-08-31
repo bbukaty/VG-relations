@@ -1,13 +1,15 @@
 // Load data into window
 subjects = null;
-d3.json("<subjects_all.json hosting link>", function(error, json) {
+d3.json("data/subjects_all.json", function(error, json) {
     if (error != null) {
         console.log(error);
+        document.getElementById('loadGif').remove();
+        document.getElementById('loadError').style.visibility = 'visible';
         return;
     }
     subjects = json;
     
-    document.getElementById('loader').remove();
+    document.getElementById('loadDiv').remove();
     document.getElementById('subjInput').style.visibility = 'visible';
     // example chart
     createSankey('kiwi');
@@ -43,7 +45,7 @@ function createSankey(subjName, relName=null) {
         return;
     }
     // reset the error message on successful submission
-    document.getElementById('loadError').style.visibility='hidden';
+    document.getElementById('subjError').style.visibility='hidden';
     if (relName == null) {
         sankeyData = genSubjData(subjName, subjects[subjName]);
     } else {

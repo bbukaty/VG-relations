@@ -33,9 +33,10 @@ Example:
 ```
 
 # Installation
-Clone or download the repository.  
-From the main directory run `scripts/setup.sh`. This downloads the data and runs a python script to process it. It's simple enough that Python 2 and 3 should both work.  
-Open `explorer.html` in your web browser of choice (I used Chrome).
+Clone or download the repository.   
+Open `explorer.html` in your web browser of choice (I used Chrome).  
+
+If you're curious about how I processed the [Visual Genome Relationship Data](https://visualgenome.org/static/data/dataset/relationships.json.zip), check out `scripts/count_relations.py`.
 
 # Navigation
 Type an item into the search bar and hit submit to see relations in which the item was the subject.  

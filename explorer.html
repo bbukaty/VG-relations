@@ -48,7 +48,10 @@
     </style>
   </head>
   <body>
-    <img id="loader" src="loading.gif" alt="Loading VG Data..." class="center">
+    <div id="loadDiv" class="center">
+      <img id="loadGif" src="loading.gif" alt="Loading VG Data...">
+      <h2 id="loadError" style="visibility: hidden;">Error loading Visual Genome Data</h2>
+    </div>
     <div id="chart" ></div>
     <span id="subjInput" style="visibility: hidden">
       <form onSubmit="return captureForm()">
@@ -56,7 +59,7 @@
         <input type="submit" value="Submit">
       </form>
     </span>
-    <span id="loadError" style="visibility: hidden; color: red">
+    <span id="subjError" style="visibility: hidden; color: red">
       Error: subject not in database. Please make another selection.
     </span>
   </body>
