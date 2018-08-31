@@ -22,10 +22,6 @@
         width: 95%;
         height: 95%;
       }
-      #loadError {
-        color: red;
-        visibility: hidden;
-      }
       .node rect {
         fill-opacity: .9;
         shape-rendering: crispEdges;
@@ -43,16 +39,25 @@
       .link:hover {
         stroke-opacity: .5;
       }
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
     </style>
   </head>
   <body>
+    <img id="loader" src="loading.gif" alt="Loading VG Data..." class="center">
     <div id="chart" ></div>
-    Subject: <input type="text" id="subject">
-    <input type="button" onclick="createSankey(document.getElementById('subject').value)" value="Submit">
-    <span id="loadError">Error: subject not in database. Please make another selection.</span>
-    <script>
-        // example chart on load
-        createSankey('kiwi');
-    </script>
+    <span id="subjInput" style="visibility: hidden">
+      <form onSubmit="return captureForm()">
+        Subject: <input type="text" id="subject">
+        <input type="submit" value="Submit">
+      </form>
+    </span>
+    <span id="loadError" style="visibility: hidden; color: red">
+      Error: subject not in database. Please make another selection.
+    </span>
   </body>
 </html>

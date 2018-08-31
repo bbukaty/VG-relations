@@ -2,14 +2,16 @@
 Visual Genome Relationship Visualization  
 Hosted at (Visual Genome Link)
 
-This is a tool for visualizing the frequency of object relationships in the Visual Genome dataset.
+This is a tool for visualizing the frequency of object relationships in the Visual Genome dataset, a miniproject I made during my research internship with Ranjay Krishna at Stanford Vision and Learning.  
+
+The data format I use and its associated visualization is interesting to me because it suggests a potential way of imbuing computer vision algorithms with a form of common sense. For example, 'what kinds of objects usually contain food? → bowls, plates, table'. This idea is also explored in [Neural Motifs: Scene Graph Parsing with Global Context](https://arxiv.org/abs/1711.06640) by Zellers et al.  
 
 ![Visualization Example](kiwi.gif)
 
-It was built with [this d3 Sankey diagram library.](https://github.com/q-m/d3.chart.sankey)
+Built with [this d3 Sankey diagram library.](https://github.com/q-m/d3.chart.sankey)
 
 # Data Processing
-For this visualization, I tallied up all the relations in all the images in Visual Genome into this JSON format:
+I tallied up all the relations in all the images in Visual Genome into this JSON format:
 ```
 {
     "subject": {
@@ -29,7 +31,6 @@ Example:
     }
 }
 ```
-I found this data format interesting as it potentially suggests a method for commonsense inference on visual data using priors from this dataset. For example, 'what kinds of objects usually contain food? → bowls, plates, table'.
 
 # Installation
 Clone or download the repository.  

@@ -1,4 +1,26 @@
-/* Accepts a dict of dicts... of numbers.
+// Load data into window
+subjects = null;
+d3.json("<subjects_all.json hosting link>", function(error, json) {
+    if (error != null) {
+        console.log(error);
+        return;
+    }
+    subjects = json;
+    
+    document.getElementById('loader').remove();
+    document.getElementById('subjInput').style.visibility = 'visible';
+    // example chart
+    createSankey('kiwi');
+});
+
+
+/* Get input from the subject form and prevent default form behavior */
+function captureForm() {
+    createSankey(document.getElementById('subject').value);
+    return false;
+}
+
+/* Accepts a dict of dicts of dicts, etc... of numbers.
 Returns the sum of all the 'leaf node' numbers in this data structure. */ 
 function sumBranches(obj) {
     var total = 0;
@@ -16,21 +38,19 @@ function sumBranches(obj) {
 /* Given a subject name and an optional relation name, generates data for a
 Sankey visualization and displays it in the page. */
 function createSankey(subjName, relName=null) {
-    d3.json("data/subjects/" + subjName + ".json", function(error, json) {
-        if (error != null) {
-            console.log(error);
-            document.getElementById('loadError').style.visibility='visible';
-            return;
-        }
-        document.getElementById('loadError').style.visibility='hidden';
-        if (relName == null) {
-            sankeyData = genSubjData(subjName, json);
-        } else {
-            sankeyData = genSubjRelData(subjName, relName, json);
-        }
+    if (!(subjName in subjects)) {
+        document.getElementById('loadError').style.visibility='visible';
+        return;
+    }
+    // reset the error message on successful submission
+    document.getElementById('loadError').style.visibility='hidden';
+    if (relName == null) {
+        sankeyData = genSubjData(subjName, subjects[subjName]);
+    } else {
+        sankeyData = genSubjRelData(subjName, relName, subjects[subjName]);
+    }
 
-        displaySankey(sankeyData);
-    });
+    displaySankey(sankeyData);
 }
 
 /* Takes in a subject name and its corresponding dict of relations.
