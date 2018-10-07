@@ -1,6 +1,6 @@
 # VG-relations
 Visual Genome Relationship Visualization  
-Check it out [here!](https://cs.stanford.edu/people/bbukaty/VG-relations/explorer.html)
+## Check it out [here!](http://www.buckbukaty.com/VG-relations/explorer.html)
 
 This is a tool for visualizing the frequency of object relationships in the Visual Genome dataset, a miniproject I made during my research internship with Ranjay Krishna at Stanford Vision and Learning.  
 
